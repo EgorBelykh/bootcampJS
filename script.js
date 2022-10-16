@@ -1,32 +1,29 @@
 
 
-var subtractButton = document.getElementById('subtract');
-var addButton = document.getElementById('add');
-var buyButton = document.getElementById('buy');
 
-var count = document.getElementById("count");
 
-var productCount = 1;
+let count = document.getElementById("count");
 
-var img1Src = 'image1.jpg';
-var img2Src = 'image2.jpg';
-var img3Src = 'image3.jpg';
+
+let addButton = document.getElementById('add');
+addButton.addEventListener('click', add);
 
 function add() {
 	
-	productCount ++;
-	count.textContent = productCount;
-	if (productCount > 1) {
+	count.value ++;
+	if (count.value > 1) {
 		
 		subtractButton.removeAttribute('disabled');
 	}
 }
 
+let subtractButton = document.getElementById('subtract');
+subtractButton.addEventListener('click', subtract);
+
 function subtract() {
 	
-	productCount --;
-	count.textContent = productCount;
-	if (productCount == 1) {
+	count.value --;
+	if (count.value == 1) {
 		
 		subtractButton.setAttribute('disabled', true);
 
@@ -34,35 +31,26 @@ function subtract() {
 
 }
 
-
-
+let buyButton = document.getElementById('buy');
+buyButton.addEventListener('click', buy);
 function buy() {
 	new Noty({
-    text: "В корзину добавлено " + productCount + " товаров",
+    text: "В корзину добавлено " + count.value + " товаров",
     timeout: 2000,
     type: 'info',
 	}).show()
 }
 
-subtractButton.addEventListener('click', subtract)
-addButton.addEventListener('click', add)
-buyButton.addEventListener('click', buy)
+const imageSrc = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
 
-var bigImg = document.getElementById("bigImg");
+let bigImg = document.getElementById("bigImg");
 
-var img1 = document.getElementById("img1");
-img1.addEventListener('mouseover', function() {
-	bigImg.setAttribute('src', img1Src);
+let images = document.querySelectorAll('img.mini-image');
+
+for (var i = 0; i < images.length; i++) {
+	let src = imageSrc[i];
+	images[i].addEventListener('mouseover', function() {
+		bigImg.setAttribute('src', src);	
 });
+}
 
-var img2 = document.getElementById("img2");
-img2.addEventListener('mouseover', function() {
-	bigImg.setAttribute('src', img2Src);
-});
-
-var img3 = document.getElementById("img3");
-img3.addEventListener('mouseover', function() {
-	bigImg.setAttribute('src', img3Src);
-});
-
-//buyButton.addEventListener("click", add);
