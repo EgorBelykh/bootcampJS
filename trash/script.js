@@ -41,16 +41,19 @@ function buy() {
 	}).show()
 }
 
-const imageSrc = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
+const imageSrc = [];
 
 let bigImg = document.getElementById("bigImg");
 
 let images = document.querySelectorAll('img.mini-image');
 
 for (var i = 0; i < images.length; i++) {
+	imageSrc[i] = images[i].getAttribute('src');
 	let src = imageSrc[i];
 	images[i].addEventListener('mouseover', function() {
 		bigImg.setAttribute('src', src);	
 });
+
+	bigImg.setAttribute('src', imageSrc[0]);
 }
 
